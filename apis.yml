@@ -4,8 +4,7 @@ url: >-
 apis:
   - aid: us-department-of-defense:us-department-of-defense
     name: US Department of Defense
-    tags:
-      - API
+    tags: []
     humanURL: https://data.defense.gov/Featured-API
     properties:
       - url: https://data.defense.gov/Featured-API
