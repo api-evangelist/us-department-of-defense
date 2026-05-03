@@ -1,0 +1,201 @@
+vocabulary:
+  name: US Department of Defense Vocabulary
+  description: >-
+    Domain vocabulary for the US Department of Defense covering water management,
+    military operations, waterway navigation, and defense data services.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+
+domains:
+  - name: Water Management
+    description: USACE water resource management concepts
+    terms:
+      - term: Time Series
+        definition: >-
+          A sequence of data points indexed in time order representing continuous
+          measurements at a USACE monitoring location
+        source: CWMS Data API
+        tags:
+          - Hydrology
+          - Monitoring
+      - term: CWMS (Corps Water Management System)
+        definition: >-
+          The US Army Corps of Engineers enterprise water management information
+          system used to collect, store, and disseminate water management data
+        source: USACE
+        tags:
+          - Water Management
+          - Information Systems
+      - term: Stage
+        definition: >-
+          The height of water above a reference datum measured at a stream,
+          lake, or reservoir monitoring location
+        source: USACE
+        tags:
+          - Hydrology
+          - Measurement
+      - term: Discharge
+        definition: >-
+          The volume of water flowing past a point per unit time, typically
+          measured in cubic feet per second (cfs) or cubic meters per second
+        source: USGS/USACE
+        tags:
+          - Hydrology
+          - Measurement
+      - term: Rating Curve
+        definition: >-
+          A relationship between water stage and discharge used to compute
+          streamflow from continuous stage measurements
+        source: USACE
+        tags:
+          - Hydrology
+          - Computation
+      - term: Pool Elevation
+        definition: >-
+          The water surface elevation in a reservoir, typically measured
+          relative to a vertical datum like NAVD88 or NGVD29
+        source: USACE
+        tags:
+          - Reservoir
+          - Measurement
+      - term: Conservation Pool
+        definition: >-
+          The portion of reservoir storage allocated for water supply,
+          recreation, fish and wildlife, and other conservation purposes
+        source: USACE
+        tags:
+          - Reservoir
+          - Operations
+      - term: Flood Control Pool
+        definition: >-
+          The portion of reservoir storage reserved for temporary flood
+          control during storm events
+        source: USACE
+        tags:
+          - Reservoir
+          - Flood Control
+      - term: District Office
+        definition: >-
+          One of the USACE's geographic district offices, each responsible
+          for managing water resources and civil works in a defined area
+        source: USACE
+        tags:
+          - Organization
+          - Geographic
+
+  - name: Waterway Navigation
+    description: Inland waterway and navigation concepts
+    terms:
+      - term: Lock
+        definition: >-
+          A structure used to raise and lower vessels on a waterway
+          to overcome a change in water level
+        source: USACE
+        tags:
+          - Navigation
+          - Infrastructure
+      - term: Lock Queue
+        definition: >-
+          The list of vessels waiting to transit a lock, reported in
+          near-real-time by the LPMS system
+        source: LPMS
+        tags:
+          - Navigation
+          - Real-Time Data
+      - term: Tonnage Report
+        definition: >-
+          A monthly summary of commodities and tonnage that have transited
+          through a lock, reported by the LPMS system
+        source: LPMS
+        tags:
+          - Navigation
+          - Statistics
+      - term: Traffic Report
+        definition: >-
+          A summary of vessel traffic through a USACE lock over a specified
+          time period
+        source: LPMS
+        tags:
+          - Navigation
+          - Statistics
+
+  - name: Quality Codes
+    description: CWMS data quality flag codes
+    terms:
+      - term: Quality Code 0
+        definition: "Data has not been screened for quality"
+        source: CWMS
+        tags:
+          - Data Quality
+      - term: Quality Code 2
+        definition: "Data has passed quality screening and is considered valid"
+        source: CWMS
+        tags:
+          - Data Quality
+      - term: Quality Code 4
+        definition: "Data value is missing or not reported"
+        source: CWMS
+        tags:
+          - Data Quality
+      - term: Quality Code 8
+        definition: "Data is questionable and may require review"
+        source: CWMS
+        tags:
+          - Data Quality
+
+  - name: Vertical Datums
+    description: Elevation reference datums used in USACE data
+    terms:
+      - term: NAVD88
+        definition: >-
+          North American Vertical Datum of 1988, the current official
+          vertical datum for the United States
+        tags:
+          - Measurement
+          - Standards
+      - term: NGVD29
+        definition: >-
+          National Geodetic Vertical Datum of 1929, the predecessor to
+          NAVD88, still used in some legacy USACE data
+        tags:
+          - Measurement
+          - Standards
+
+api_properties:
+  data_types:
+    - Time Series (Continuous)
+    - Time Series (Irregular)
+    - Location Metadata
+    - Rating Curves
+    - Location Levels
+    - Field Measurements
+    - Project Data
+    - Reservoir Pools
+
+  access_methods:
+    - REST API
+    - Swagger UI
+    - CSV Download
+    - JSON
+    - XML
+    - Tab-delimited
+
+  authentication:
+    - No Authentication (public read)
+    - API Key (write operations)
+
+  district_offices:
+    - LRH: Huntington District
+    - LRN: Nashville District
+    - SWT: Tulsa District
+    - SWL: Little Rock District
+    - MVN: New Orleans District
+    - MVS: St. Louis District
+    - MVR: Rock Island District
+    - MVP: St. Paul District
+    - NWK: Kansas City District
+    - NWO: Omaha District
+    - POA: Alaska District
+    - SPK: Sacramento District
+    - SPA: Albuquerque District

@@ -1,0 +1,90 @@
+{
+  "title": "USACE CWMS Time Series Structure",
+  "description": "Documentation of the data structure for time series responses from the USACE CWMS Data API",
+  "type": "object",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Time series identifier using dot-notation: Location.Parameter.Type.Interval.Duration.Version",
+      "example": "TULA.Stage.Inst.15Minutes.0.GOES-REV"
+    },
+    {
+      "name": "office-id",
+      "type": "string",
+      "required": true,
+      "description": "USACE district office abbreviation (e.g., SWT=Tulsa District, LRH=Huntington District)",
+      "example": "SWT"
+    },
+    {
+      "name": "units",
+      "type": "string",
+      "required": true,
+      "description": "Engineering unit for the parameter values (e.g., ft for stage, cfs for flow)",
+      "example": "ft"
+    },
+    {
+      "name": "interval",
+      "type": "integer",
+      "required": false,
+      "description": "Regular interval between observations in minutes (0 for irregular)",
+      "example": 15
+    },
+    {
+      "name": "interval-offset",
+      "type": "integer",
+      "required": false,
+      "description": "Offset from midnight in minutes for interval alignment",
+      "example": 0
+    },
+    {
+      "name": "time-zone",
+      "type": "string",
+      "required": false,
+      "description": "IANA timezone name for interpreting timestamp values",
+      "example": "UTC"
+    },
+    {
+      "name": "values",
+      "type": "array",
+      "required": true,
+      "description": "Array of observations, each as a 3-element array: [epoch_ms, measurement, quality_code]",
+      "itemStructure": {
+        "index_0": {
+          "name": "timestamp",
+          "type": "integer",
+          "description": "Unix timestamp in milliseconds (UTC)"
+        },
+        "index_1": {
+          "name": "value",
+          "type": "number",
+          "description": "Measured value in the specified units (-9999999.0 indicates missing)"
+        },
+        "index_2": {
+          "name": "quality_code",
+          "type": "integer",
+          "description": "CWMS quality code: 0=Unscreened, 2=Okay, 4=Missing, 8=Questionable"
+        }
+      }
+    },
+    {
+      "name": "page",
+      "type": "string",
+      "required": false,
+      "description": "Opaque pagination cursor for the current page"
+    },
+    {
+      "name": "next-page",
+      "type": "string",
+      "required": false,
+      "description": "Cursor for retrieving the next page; null when on the last page"
+    },
+    {
+      "name": "total",
+      "type": "integer",
+      "required": false,
+      "description": "Total number of observations matching the query"
+    }
+  ]
+}

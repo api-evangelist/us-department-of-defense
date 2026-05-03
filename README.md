@@ -1,42 +1,91 @@
-# US Department of Defense (us-department-of-defense)
-The US Department of Defense is responsible for providing the military forces needed to deter war and protect the security of the United States. This includes overseeing the Army, Navy, Marine Corps, and Air Force, as well as coordinating with other defense agencies and organizations. The Department of Defense also plays a critical role in developing military strategies, acquiring and maintaining weapons and equipment, and ensuring the readiness and effectiveness of the armed forces. Additionally, the Department of Defense works to support national security objectives and alliances, both domestically and internationally. Overall, the US Department of Defense plays a crucial role in safeguarding the nation and its interests.
+# US Department of Defense
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/us-department-of-defense/refs/heads/main/apis.yml)
+The US Department of Defense is responsible for providing the military forces needed to deter war and protect the security of the United States. This includes overseeing the Army, Navy, Marine Corps, and Air Force, as well as coordinating with other defense agencies and organizations. The Department of Defense also plays a critical role in developing military strategies, acquiring and maintaining weapons and equipment, and ensuring the readiness and effectiveness of the armed forces.
+
+**URL:** [https://www.defense.gov](https://www.defense.gov)
 
 ## Scope
 
-- **Type:** Contract 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Contract
+- **Position:** Consuming
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Federal Government
+`Federal Government` `Defense` `Military` `Water Management` `Waterways` `Open Data`
 
 ## Timestamps
 
-- **Created:** 2024-12-03 
-- **Modified:** 2025-01-04 
+- **Created:** 2024-12-03
+- **Modified:** 2026-05-03
 
 ## APIs
 
-### US Department of Defense
-This months featured Application Programming Interface (API) is . The US Army Corps of Engineers Lock Performance Monitoring System (LPMS). The LPMS Data Web Services provides data via Extensible Markup Language (XML) for the Lock Queue Report (past 24 hours), the Tonnage Report and the Traffic Report (past 30 days).
+| API | Description |
+|-----|-------------|
+| [USACE CWMS Data API](https://cwms-data.usace.army.mil/cwms-data/) | Corps Water Management System - time series, locations, ratings, pools |
+| [USACE Lock Performance Monitoring System](https://corpslocks.usace.army.mil/lpwb/f) | Inland waterway lock queue, tonnage, and traffic reports |
+| [DoD Data Portal](https://data.defense.gov/Featured-API/) | Department of Defense featured APIs and open data |
+| [DoD Open Data Platform](https://www.data.mil/) | Unclassified DoD datasets and data services |
 
-**Human URL:** [https://data.defense.gov/Featured-API](https://data.defense.gov/Featured-API)
+## OpenAPI Specifications
 
+| Spec | Description |
+|------|-------------|
+| [USACE CWMS Data API](openapi/usace-cwms-data-api-openapi.yml) | OpenAPI 3.0 spec for CWMS water management data |
 
-#### Tags:
+## Spectral Rules
 
- - API
+| Ruleset | Description |
+|---------|-------------|
+| [USACE CWMS Rules](rules/usace-cwms-data-api-rules.yml) | Spectral rules for CWMS Data API conventions |
 
-#### Properties
+## Naftiko Capabilities
 
-- [Documentation](https://data.defense.gov/Featured-API)
+### Workflow Capabilities
+
+| Capability | Description |
+|------------|-------------|
+| [Water Management](capabilities/water-management.yaml) | USACE water management monitoring and operations |
+
+### Shared API Definitions
+
+| Shared Definition | Description |
+|-------------------|-------------|
+| [USACE CWMS Data API](capabilities/shared/usace-cwms-data-api.yaml) | Shared definition for CWMS Data API |
+
+## JSON Schema
+
+| Schema | Description |
+|--------|-------------|
+| [CWMS Time Series](json-schema/usace-cwms-timeseries-schema.json) | Schema for CWMS time series responses |
+
+## JSON Structure
+
+| Structure | Description |
+|-----------|-------------|
+| [CWMS Time Series Structure](json-structure/usace-cwms-timeseries-structure.json) | Field documentation for CWMS time series data |
+
+## JSON-LD
+
+| Context | Description |
+|---------|-------------|
+| [DoD Context](json-ld/us-department-of-defense-context.jsonld) | Linked data context for DoD/USACE water management |
+
+## Examples
+
+| Example | Description |
+|---------|-------------|
+| [Get Time Series Example](examples/usace-cwms-get-timeseries-example.json) | Example CWMS time series response |
+
+## Vocabulary
+
+| Vocabulary | Description |
+|------------|-------------|
+| [DoD Vocabulary](vocabulary/us-department-of-defense-vocabulary.yml) | Domain vocabulary for DoD water management |
 
 ## Maintainers
 
 **FN:** Kin Lane
 
-**Email:** info@apievangelist.com
-
+**Email:** kin@apievangelist.com

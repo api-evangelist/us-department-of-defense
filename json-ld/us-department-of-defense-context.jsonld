@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dod": "https://data.defense.gov/ns/",
+    "usace": "https://water.usace.army.mil/ns/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "qudt": "http://qudt.org/schema/qudt/",
+
+    "WaterTimeSeries": "usace:WaterTimeSeries",
+    "MonitoringLocation": "schema:Place",
+    "WaterProject": "schema:GovernmentBuilding",
+    "ReservoirPool": "usace:ReservoirPool",
+    "FieldMeasurement": "usace:FieldMeasurement",
+    "RatingCurve": "usace:RatingCurve",
+
+    "id": "@id",
+    "type": "@type",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "office-id": "usace:officeId",
+    "units": "qudt:unit",
+    "interval": "usace:measurementInterval",
+    "time-zone": "usace:timezone",
+    "values": "usace:observations",
+
+    "latitude": "geo:lat",
+    "longitude": "geo:long",
+    "elevation": "usace:elevation",
+    "horizontal-datum": "usace:horizontalDatum",
+    "vertical-datum": "usace:verticalDatum",
+    "active": "schema:availableOnDevice",
+    "public-name": "schema:alternateName",
+
+    "Department": {
+      "@id": "schema:GovernmentOrganization",
+      "name": "US Department of Defense",
+      "url": "https://www.defense.gov",
+      "sameAs": [
+        "https://www.wikidata.org/wiki/Q11226",
+        "https://dbpedia.org/resource/United_States_Department_of_Defense"
+      ]
+    },
+
+    "USACE": {
+      "@id": "schema:GovernmentOrganization",
+      "name": "US Army Corps of Engineers",
+      "url": "https://www.usace.army.mil",
+      "sameAs": "https://www.wikidata.org/wiki/Q1049371"
+    }
+  }
+}

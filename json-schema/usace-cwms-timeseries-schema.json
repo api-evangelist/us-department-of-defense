@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/us-department-of-defense/main/json-schema/usace-cwms-timeseries-schema.json",
+  "title": "USACE CWMS Time Series Response",
+  "description": "Schema for a USACE Corps Water Management System time series data response",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Time series identifier in format Location.Parameter.Type.Interval.Duration.Version",
+      "example": "TULA.Stage.Inst.15Minutes.0.GOES-REV"
+    },
+    "office-id": {
+      "type": "string",
+      "description": "USACE district office abbreviation",
+      "example": "SWT"
+    },
+    "units": {
+      "type": "string",
+      "description": "Unit of measure for the values",
+      "example": "ft"
+    },
+    "interval": {
+      "type": "integer",
+      "description": "Interval between values in minutes",
+      "example": 15
+    },
+    "interval-offset": {
+      "type": "integer",
+      "description": "Offset in minutes from midnight for interval alignment",
+      "example": 0
+    },
+    "time-zone": {
+      "type": "string",
+      "description": "Time zone identifier for date/time values",
+      "example": "UTC"
+    },
+    "values": {
+      "type": "array",
+      "description": "Array of time series values as [timestamp_ms, value, quality_code] tuples",
+      "items": {
+        "type": "array",
+        "description": "A single time series observation",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      }
+    },
+    "page": {
+      "type": "string",
+      "nullable": true,
+      "description": "Current page cursor for pagination"
+    },
+    "next-page": {
+      "type": "string",
+      "nullable": true,
+      "description": "Cursor for retrieving the next page of results"
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total number of values matching the query"
+    }
+  },
+  "required": ["name", "office-id", "units", "values"]
+}

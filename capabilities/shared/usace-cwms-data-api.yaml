@@ -1,0 +1,386 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "USACE CWMS Data API"
+  description: "Corps Water Management System Data API providing access to USACE water management data including time series, locations, ratings, and operational data."
+  tags:
+    - Water Management
+    - Hydrology
+    - Army Corps of Engineers
+    - Federal Government
+    - Open Data
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys: {}
+
+capability:
+  consumes:
+    - type: http
+      namespace: cwms
+      baseUri: https://cwms-data.usace.army.mil/cwms-data/api/latest
+      description: "USACE Corps Water Management System Data API"
+      resources:
+        - name: timeseries
+          path: /timeseries
+          description: "Water management time series data"
+          operations:
+            - name: get-time-series
+              method: GET
+              description: "Get time series data for a location and parameter"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: name
+                  in: query
+                  type: string
+                  required: false
+                  description: "Time series ID"
+                - name: begin
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start of time window (ISO 8601)"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End of time window (ISO 8601)"
+                - name: unit
+                  in: query
+                  type: string
+                  required: false
+                  description: "Unit system (EN or SI)"
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Response format (json, csv, xml)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: timeseries-catalog
+          path: /timeseries/catalog
+          description: "Time series catalog"
+          operations:
+            - name: get-time-series-catalog
+              method: GET
+              description: "Get catalog of available time series"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: page-size
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of entries per page"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: locations
+          path: /locations
+          description: "CWMS monitoring locations"
+          operations:
+            - name: get-locations
+              method: GET
+              description: "Get monitoring locations"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: names
+                  in: query
+                  type: string
+                  required: false
+                  description: "Pipe-separated list of location IDs"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-location
+              method: GET
+              description: "Get a specific monitoring location"
+              inputParameters:
+                - name: locationId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Location identifier"
+                - name: office
+                  in: query
+                  type: string
+                  required: true
+                  description: "USACE district office ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: locations-catalog
+          path: /locations/catalog
+          description: "Location catalog"
+          operations:
+            - name: get-location-catalog
+              method: GET
+              description: "Get searchable catalog of all locations"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: ratings
+          path: /ratings
+          description: "Rating curves for stage-discharge conversion"
+          operations:
+            - name: get-ratings
+              method: GET
+              description: "Get rating curves"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: rating-id-mask
+                  in: query
+                  type: string
+                  required: false
+                  description: "Pattern to filter rating IDs"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: levels
+          path: /levels
+          description: "Location levels and pool data"
+          operations:
+            - name: get-levels
+              method: GET
+              description: "Get location levels and operational thresholds"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: location-id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Location identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: offices
+          path: /offices
+          description: "USACE district offices"
+          operations:
+            - name: get-offices
+              method: GET
+              description: "Get list of USACE district offices"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: projects
+          path: /projects
+          description: "USACE projects and reservoirs"
+          operations:
+            - name: get-projects
+              method: GET
+              description: "Get USACE projects"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: measurements
+          path: /measurements
+          description: "Field measurements"
+          operations:
+            - name: get-measurements
+              method: GET
+              description: "Get field measurements from site visits"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+                - name: location-id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Location identifier"
+                - name: begin
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start of time window"
+                - name: end
+                  in: query
+                  type: string
+                  required: false
+                  description: "End of time window"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: pools
+          path: /pools
+          description: "Reservoir pool definitions"
+          operations:
+            - name: get-pools
+              method: GET
+              description: "Get reservoir pool definitions"
+              inputParameters:
+                - name: office
+                  in: query
+                  type: string
+                  required: false
+                  description: "USACE district office ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: cwms-rest
+      resources:
+        - path: /v1/timeseries
+          name: timeseries
+          description: "Water management time series data"
+          operations:
+            - method: GET
+              name: get-time-series
+              description: "Get time series data"
+              call: "cwms.get-time-series"
+              with:
+                office: "rest.office"
+                name: "rest.name"
+                begin: "rest.begin"
+                end: "rest.end"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/locations
+          name: locations
+          description: "CWMS monitoring locations"
+          operations:
+            - method: GET
+              name: get-locations
+              description: "Get monitoring locations"
+              call: "cwms.get-locations"
+              with:
+                office: "rest.office"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/offices
+          name: offices
+          description: "USACE district offices"
+          operations:
+            - method: GET
+              name: get-offices
+              description: "Get USACE offices"
+              call: "cwms.get-offices"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: cwms-mcp
+      transport: http
+      tools:
+        - name: get-water-timeseries
+          description: "Get time series water data for a USACE location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cwms.get-time-series"
+          with:
+            office: "tools.office"
+            name: "tools.name"
+            begin: "tools.begin"
+            end: "tools.end"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cwms-locations
+          description: "Get USACE water monitoring locations"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cwms.get-locations"
+          with:
+            office: "tools.office"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cwms-offices
+          description: "Get list of USACE district offices"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cwms.get-offices"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-reservoir-pools
+          description: "Get reservoir pool definitions and operational levels"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cwms.get-pools"
+          with:
+            office: "tools.office"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cwms-projects
+          description: "Get USACE projects including reservoirs and navigation projects"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cwms.get-projects"
+          with:
+            office: "tools.office"
+          outputParameters:
+            - type: object
+              mapping: "$."
