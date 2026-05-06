@@ -1,333 +1,567 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "USACE Water Management"
-  description: >-
-    Workflow capability for USACE water management operations including
-    reservoir monitoring, flood control, navigation, and water quality.
-    Combines CWMS time series data, location metadata, reservoir pool levels,
-    and field measurements for comprehensive water resource management workflows.
+  label: USACE Water Management
+  description: Workflow capability for USACE water management operations including reservoir monitoring, flood control, navigation,
+    and water quality. Combines CWMS time series data, location metadata, reservoir pool levels, and field measurements for
+    comprehensive water resource management workflows.
   tags:
-    - Water Management
-    - Hydrology
-    - Reservoirs
-    - Flood Control
-    - Navigation
-    - Federal Government
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Water Management
+  - Hydrology
+  - Reservoirs
+  - Flood Control
+  - Navigation
+  - Federal Government
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys: {}
-
+- namespace: env
+  keys: {}
 capability:
   consumes:
-    - import: cwms
-      location: ./shared/usace-cwms-data-api.yaml
-
+  - type: http
+    namespace: cwms
+    baseUri: https://cwms-data.usace.army.mil/cwms-data/api/latest
+    description: USACE Corps Water Management System Data API
+    resources:
+    - name: timeseries
+      path: /timeseries
+      description: Water management time series data
+      operations:
+      - name: get-time-series
+        method: GET
+        description: Get time series data for a location and parameter
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: name
+          in: query
+          type: string
+          required: false
+          description: Time series ID
+        - name: begin
+          in: query
+          type: string
+          required: false
+          description: Start of time window (ISO 8601)
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End of time window (ISO 8601)
+        - name: unit
+          in: query
+          type: string
+          required: false
+          description: Unit system (EN or SI)
+        - name: format
+          in: query
+          type: string
+          required: false
+          description: Response format (json, csv, xml)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: timeseries-catalog
+      path: /timeseries/catalog
+      description: Time series catalog
+      operations:
+      - name: get-time-series-catalog
+        method: GET
+        description: Get catalog of available time series
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: page-size
+          in: query
+          type: integer
+          required: false
+          description: Number of entries per page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: locations
+      path: /locations
+      description: CWMS monitoring locations
+      operations:
+      - name: get-locations
+        method: GET
+        description: Get monitoring locations
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: names
+          in: query
+          type: string
+          required: false
+          description: Pipe-separated list of location IDs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-location
+        method: GET
+        description: Get a specific monitoring location
+        inputParameters:
+        - name: locationId
+          in: path
+          type: string
+          required: true
+          description: Location identifier
+        - name: office
+          in: query
+          type: string
+          required: true
+          description: USACE district office ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: locations-catalog
+      path: /locations/catalog
+      description: Location catalog
+      operations:
+      - name: get-location-catalog
+        method: GET
+        description: Get searchable catalog of all locations
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ratings
+      path: /ratings
+      description: Rating curves for stage-discharge conversion
+      operations:
+      - name: get-ratings
+        method: GET
+        description: Get rating curves
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: rating-id-mask
+          in: query
+          type: string
+          required: false
+          description: Pattern to filter rating IDs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: levels
+      path: /levels
+      description: Location levels and pool data
+      operations:
+      - name: get-levels
+        method: GET
+        description: Get location levels and operational thresholds
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: location-id
+          in: query
+          type: string
+          required: false
+          description: Location identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: offices
+      path: /offices
+      description: USACE district offices
+      operations:
+      - name: get-offices
+        method: GET
+        description: Get list of USACE district offices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: projects
+      path: /projects
+      description: USACE projects and reservoirs
+      operations:
+      - name: get-projects
+        method: GET
+        description: Get USACE projects
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: measurements
+      path: /measurements
+      description: Field measurements
+      operations:
+      - name: get-measurements
+        method: GET
+        description: Get field measurements from site visits
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        - name: location-id
+          in: query
+          type: string
+          required: false
+          description: Location identifier
+        - name: begin
+          in: query
+          type: string
+          required: false
+          description: Start of time window
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End of time window
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pools
+      path: /pools
+      description: Reservoir pool definitions
+      operations:
+      - name: get-pools
+        method: GET
+        description: Get reservoir pool definitions
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          required: false
+          description: USACE district office ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: water-management-api
-      description: "Unified REST API for USACE water management data and monitoring."
-      resources:
-        - path: /v1/timeseries
-          name: timeseries
-          description: "Water management time series measurements"
-          operations:
-            - method: GET
-              name: get-time-series
-              description: "Get time series data for a water management location"
-              call: "cwms.get-time-series"
-              with:
-                office: "rest.office"
-                name: "rest.name"
-                begin: "rest.begin"
-                end: "rest.end"
-                unit: "rest.unit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/timeseries/catalog
-          name: timeseries-catalog
-          description: "Catalog of available time series"
-          operations:
-            - method: GET
-              name: get-time-series-catalog
-              description: "Browse available time series identifiers"
-              call: "cwms.get-time-series-catalog"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/locations
-          name: locations
-          description: "Water monitoring locations"
-          operations:
-            - method: GET
-              name: get-locations
-              description: "Get USACE monitoring locations"
-              call: "cwms.get-locations"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/locations/{locationId}
-          name: location
-          description: "Single monitoring location"
-          operations:
-            - method: GET
-              name: get-location
-              description: "Get details for a specific monitoring location"
-              call: "cwms.get-location"
-              with:
-                locationId: "rest.locationId"
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/locations/catalog
-          name: locations-catalog
-          description: "Searchable location catalog"
-          operations:
-            - method: GET
-              name: get-location-catalog
-              description: "Browse all available USACE locations"
-              call: "cwms.get-location-catalog"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/levels
-          name: levels
-          description: "Location levels and pool data"
-          operations:
-            - method: GET
-              name: get-levels
-              description: "Get location levels and flood stage thresholds"
-              call: "cwms.get-levels"
-              with:
-                office: "rest.office"
-                location-id: "rest.location_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/ratings
-          name: ratings
-          description: "Stage-discharge rating curves"
-          operations:
-            - method: GET
-              name: get-ratings
-              description: "Get rating curves for stage to discharge conversion"
-              call: "cwms.get-ratings"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/projects
-          name: projects
-          description: "USACE projects and reservoirs"
-          operations:
-            - method: GET
-              name: get-projects
-              description: "Get USACE water projects"
-              call: "cwms.get-projects"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pools
-          name: pools
-          description: "Reservoir pool definitions"
-          operations:
-            - method: GET
-              name: get-pools
-              description: "Get reservoir pool storage zones"
-              call: "cwms.get-pools"
-              with:
-                office: "rest.office"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/measurements
-          name: measurements
-          description: "Field measurements"
-          operations:
-            - method: GET
-              name: get-measurements
-              description: "Get field measurements from hydrographer site visits"
-              call: "cwms.get-measurements"
-              with:
-                office: "rest.office"
-                location-id: "rest.location_id"
-                begin: "rest.begin"
-                end: "rest.end"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/offices
-          name: offices
-          description: "USACE district offices"
-          operations:
-            - method: GET
-              name: get-offices
-              description: "List USACE district offices"
-              call: "cwms.get-offices"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: water-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted USACE water management monitoring, flood risk analysis, and reservoir operations."
-      tools:
-        - name: get-water-time-series
-          description: >-
-            Get time series water measurements from a USACE monitoring location.
-            Retrieves streamflow, stage, reservoir elevation, temperature, and
-            other parameters. Specify office, time series name, and time range.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-time-series"
-          with:
-            office: "tools.office"
-            name: "tools.name"
-            begin: "tools.begin"
-            end: "tools.end"
-            unit: "tools.unit"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: browse-time-series-catalog
-          description: >-
-            Browse the catalog of available USACE time series identifiers.
-            Useful for discovering what data is available for a district office
-            before retrieving actual measurements.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-time-series-catalog"
-          with:
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-monitoring-locations
-          description: >-
-            Get USACE water monitoring locations with geographic coordinates
-            and metadata. Filter by district office to scope results.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-locations"
-          with:
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-monitoring-location-details
-          description: >-
-            Get detailed information for a specific USACE monitoring location
-            including coordinates, elevation datum, state, county, and description.
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "cwms.get-location"
-          with:
-            locationId: "tools.location_id"
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-flood-stage-levels
-          description: >-
-            Get location levels including flood stage thresholds, flood control
-            pools, and operational levels for USACE monitoring locations and
-            reservoirs. Essential for flood risk assessment.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-levels"
-          with:
-            office: "tools.office"
-            location-id: "tools.location_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-stage-discharge-ratings
-          description: >-
-            Get rating curves used to convert stage (water level) measurements
-            to discharge (streamflow) values. Essential for computing streamflow
-            from continuous stage data.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-ratings"
-          with:
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-usace-projects
-          description: >-
-            Get USACE water resource projects including reservoirs, navigation
-            projects, and flood control structures with operational parameters.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-projects"
-          with:
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-reservoir-pools
-          description: >-
-            Get reservoir pool definitions including conservation pool, flood
-            control pool, and surcharge storage zones for USACE reservoirs.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-pools"
-          with:
-            office: "tools.office"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-field-measurements
-          description: >-
-            Get field measurements collected by USACE hydrographers during site
-            visits. These include streamflow discharge measurements used for
-            rating curve development and validation.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-measurements"
-          with:
-            office: "tools.office"
-            location-id: "tools.location_id"
-            begin: "tools.begin"
-            end: "tools.end"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-usace-offices
-          description: >-
-            List all USACE district offices with their identifiers.
-            Use to find the office ID needed to scope other queries.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "cwms.get-offices"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: water-management-api
+    description: Unified REST API for USACE water management data and monitoring.
+    resources:
+    - path: /v1/timeseries
+      name: timeseries
+      description: Water management time series measurements
+      operations:
+      - method: GET
+        name: get-time-series
+        description: Get time series data for a water management location
+        call: cwms.get-time-series
+        with:
+          office: rest.office
+          name: rest.name
+          begin: rest.begin
+          end: rest.end
+          unit: rest.unit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/timeseries/catalog
+      name: timeseries-catalog
+      description: Catalog of available time series
+      operations:
+      - method: GET
+        name: get-time-series-catalog
+        description: Browse available time series identifiers
+        call: cwms.get-time-series-catalog
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations
+      name: locations
+      description: Water monitoring locations
+      operations:
+      - method: GET
+        name: get-locations
+        description: Get USACE monitoring locations
+        call: cwms.get-locations
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations/{locationId}
+      name: location
+      description: Single monitoring location
+      operations:
+      - method: GET
+        name: get-location
+        description: Get details for a specific monitoring location
+        call: cwms.get-location
+        with:
+          locationId: rest.locationId
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations/catalog
+      name: locations-catalog
+      description: Searchable location catalog
+      operations:
+      - method: GET
+        name: get-location-catalog
+        description: Browse all available USACE locations
+        call: cwms.get-location-catalog
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/levels
+      name: levels
+      description: Location levels and pool data
+      operations:
+      - method: GET
+        name: get-levels
+        description: Get location levels and flood stage thresholds
+        call: cwms.get-levels
+        with:
+          office: rest.office
+          location-id: rest.location_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ratings
+      name: ratings
+      description: Stage-discharge rating curves
+      operations:
+      - method: GET
+        name: get-ratings
+        description: Get rating curves for stage to discharge conversion
+        call: cwms.get-ratings
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects
+      name: projects
+      description: USACE projects and reservoirs
+      operations:
+      - method: GET
+        name: get-projects
+        description: Get USACE water projects
+        call: cwms.get-projects
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pools
+      name: pools
+      description: Reservoir pool definitions
+      operations:
+      - method: GET
+        name: get-pools
+        description: Get reservoir pool storage zones
+        call: cwms.get-pools
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/measurements
+      name: measurements
+      description: Field measurements
+      operations:
+      - method: GET
+        name: get-measurements
+        description: Get field measurements from hydrographer site visits
+        call: cwms.get-measurements
+        with:
+          office: rest.office
+          location-id: rest.location_id
+          begin: rest.begin
+          end: rest.end
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/offices
+      name: offices
+      description: USACE district offices
+      operations:
+      - method: GET
+        name: get-offices
+        description: List USACE district offices
+        call: cwms.get-offices
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: water-management-mcp
+    transport: http
+    description: MCP server for AI-assisted USACE water management monitoring, flood risk analysis, and reservoir operations.
+    tools:
+    - name: get-water-time-series
+      description: Get time series water measurements from a USACE monitoring location. Retrieves streamflow, stage, reservoir
+        elevation, temperature, and other parameters. Specify office, time series name, and time range.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-time-series
+      with:
+        office: tools.office
+        name: tools.name
+        begin: tools.begin
+        end: tools.end
+        unit: tools.unit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: browse-time-series-catalog
+      description: Browse the catalog of available USACE time series identifiers. Useful for discovering what data is available
+        for a district office before retrieving actual measurements.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-time-series-catalog
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-monitoring-locations
+      description: Get USACE water monitoring locations with geographic coordinates and metadata. Filter by district office
+        to scope results.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-locations
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-monitoring-location-details
+      description: Get detailed information for a specific USACE monitoring location including coordinates, elevation datum,
+        state, county, and description.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: cwms.get-location
+      with:
+        locationId: tools.location_id
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-flood-stage-levels
+      description: Get location levels including flood stage thresholds, flood control pools, and operational levels for USACE
+        monitoring locations and reservoirs. Essential for flood risk assessment.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-levels
+      with:
+        office: tools.office
+        location-id: tools.location_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stage-discharge-ratings
+      description: Get rating curves used to convert stage (water level) measurements to discharge (streamflow) values. Essential
+        for computing streamflow from continuous stage data.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-ratings
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-usace-projects
+      description: Get USACE water resource projects including reservoirs, navigation projects, and flood control structures
+        with operational parameters.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-projects
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservoir-pools
+      description: Get reservoir pool definitions including conservation pool, flood control pool, and surcharge storage zones
+        for USACE reservoirs.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-pools
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-field-measurements
+      description: Get field measurements collected by USACE hydrographers during site visits. These include streamflow discharge
+        measurements used for rating curve development and validation.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-measurements
+      with:
+        office: tools.office
+        location-id: tools.location_id
+        begin: tools.begin
+        end: tools.end
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-usace-offices
+      description: List all USACE district offices with their identifiers. Use to find the office ID needed to scope other
+        queries.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: cwms.get-offices
+      outputParameters:
+      - type: object
+        mapping: $.
