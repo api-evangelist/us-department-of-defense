@@ -1,0 +1,141 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: USACE Corps Water Management System Data API — Projects
+  description: 'USACE Corps Water Management System Data API — Projects. 2 operations. Lead operation: Get Reservoir Pools.
+    Self-contained Naftiko capability covering one Us Department Of Defense business surface.'
+  tags:
+  - Us Department Of Defense
+  - Projects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    US_DEPARTMENT_OF_DEFENSE_API_KEY: US_DEPARTMENT_OF_DEFENSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: usace-cwms-data-projects
+    baseUri: https://cwms-data.usace.army.mil/cwms-data/api/latest
+    description: USACE Corps Water Management System Data API — Projects business capability. Self-contained, no shared references.
+    resources:
+    - name: pools
+      path: /pools
+      operations:
+      - name: getpools
+        method: GET
+        description: Get Reservoir Pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: USACE district office ID
+        - name: project-id-mask
+          in: query
+          type: string
+          description: Pattern mask to filter project IDs
+        - name: name-mask
+          in: query
+          type: string
+          description: Pattern mask to filter pool names
+        - name: unit
+          in: query
+          type: string
+          description: Unit system for output values
+    - name: projects
+      path: /projects
+      operations:
+      - name: getprojects
+        method: GET
+        description: Get USACE Projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: Filter by USACE district office ID
+        - name: project-id-mask
+          in: query
+          type: string
+          description: Pattern mask to filter project IDs
+  exposes:
+  - type: rest
+    namespace: usace-cwms-data-projects-rest
+    port: 8080
+    description: REST adapter for USACE Corps Water Management System Data API — Projects. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/pools
+      name: pools
+      description: REST surface for pools.
+      operations:
+      - method: GET
+        name: getpools
+        description: Get Reservoir Pools
+        call: usace-cwms-data-projects.getpools
+        with:
+          office: rest.office
+          project-id-mask: rest.project-id-mask
+          name-mask: rest.name-mask
+          unit: rest.unit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects
+      name: projects
+      description: REST surface for projects.
+      operations:
+      - method: GET
+        name: getprojects
+        description: Get USACE Projects
+        call: usace-cwms-data-projects.getprojects
+        with:
+          office: rest.office
+          project-id-mask: rest.project-id-mask
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: usace-cwms-data-projects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for USACE Corps Water Management System Data API — Projects. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-reservoir-pools
+      description: Get Reservoir Pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-projects.getpools
+      with:
+        office: tools.office
+        project-id-mask: tools.project-id-mask
+        name-mask: tools.name-mask
+        unit: tools.unit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-usace-projects
+      description: Get USACE Projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-projects.getprojects
+      with:
+        office: tools.office
+        project-id-mask: tools.project-id-mask
+      outputParameters:
+      - type: object
+        mapping: $.

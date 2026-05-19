@@ -1,0 +1,275 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: USACE Corps Water Management System Data API — Catalog
+  description: 'USACE Corps Water Management System Data API — Catalog. 6 operations. Lead operation: Get Counties. Self-contained
+    Naftiko capability covering one Us Department Of Defense business surface.'
+  tags:
+  - Us Department Of Defense
+  - Catalog
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    US_DEPARTMENT_OF_DEFENSE_API_KEY: US_DEPARTMENT_OF_DEFENSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: usace-cwms-data-catalog
+    baseUri: https://cwms-data.usace.army.mil/cwms-data/api/latest
+    description: USACE Corps Water Management System Data API — Catalog business capability. Self-contained, no shared references.
+    resources:
+    - name: counties
+      path: /counties
+      operations:
+      - name: getcounties
+        method: GET
+        description: Get Counties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: locations-catalog
+      path: /locations/catalog
+      operations:
+      - name: getlocationcatalog
+        method: GET
+        description: Get Location Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: Filter by USACE district office ID
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor
+        - name: page-size
+          in: query
+          type: integer
+          description: Number of entries per page
+    - name: parameters
+      path: /parameters
+      operations:
+      - name: getparameters
+        method: GET
+        description: Get Parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: states
+      path: /states
+      operations:
+      - name: getstates
+        method: GET
+        description: Get States
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: timeseries-catalog
+      path: /timeseries/catalog
+      operations:
+      - name: gettimeseriescatalog
+        method: GET
+        description: Get Time Series Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: Filter by USACE district office ID
+        - name: timeseries-id-regex
+          in: query
+          type: string
+          description: Regular expression pattern to filter time series IDs
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor from previous response
+        - name: page-size
+          in: query
+          type: integer
+          description: Number of entries per page
+    - name: units
+      path: /units
+      operations:
+      - name: getunits
+        method: GET
+        description: Get Units
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: usace-cwms-data-catalog-rest
+    port: 8080
+    description: REST adapter for USACE Corps Water Management System Data API — Catalog. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/counties
+      name: counties
+      description: REST surface for counties.
+      operations:
+      - method: GET
+        name: getcounties
+        description: Get Counties
+        call: usace-cwms-data-catalog.getcounties
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations/catalog
+      name: locations-catalog
+      description: REST surface for locations-catalog.
+      operations:
+      - method: GET
+        name: getlocationcatalog
+        description: Get Location Catalog
+        call: usace-cwms-data-catalog.getlocationcatalog
+        with:
+          office: rest.office
+          cursor: rest.cursor
+          page-size: rest.page-size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/parameters
+      name: parameters
+      description: REST surface for parameters.
+      operations:
+      - method: GET
+        name: getparameters
+        description: Get Parameters
+        call: usace-cwms-data-catalog.getparameters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/states
+      name: states
+      description: REST surface for states.
+      operations:
+      - method: GET
+        name: getstates
+        description: Get States
+        call: usace-cwms-data-catalog.getstates
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/timeseries/catalog
+      name: timeseries-catalog
+      description: REST surface for timeseries-catalog.
+      operations:
+      - method: GET
+        name: gettimeseriescatalog
+        description: Get Time Series Catalog
+        call: usace-cwms-data-catalog.gettimeseriescatalog
+        with:
+          office: rest.office
+          timeseries-id-regex: rest.timeseries-id-regex
+          cursor: rest.cursor
+          page-size: rest.page-size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/units
+      name: units
+      description: REST surface for units.
+      operations:
+      - method: GET
+        name: getunits
+        description: Get Units
+        call: usace-cwms-data-catalog.getunits
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: usace-cwms-data-catalog-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for USACE Corps Water Management System Data API — Catalog. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-counties
+      description: Get Counties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.getcounties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-location-catalog
+      description: Get Location Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.getlocationcatalog
+      with:
+        office: tools.office
+        cursor: tools.cursor
+        page-size: tools.page-size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-parameters
+      description: Get Parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.getparameters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-states
+      description: Get States
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.getstates
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-time-series-catalog
+      description: Get Time Series Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.gettimeseriescatalog
+      with:
+        office: tools.office
+        timeseries-id-regex: tools.timeseries-id-regex
+        cursor: tools.cursor
+        page-size: tools.page-size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-units
+      description: Get Units
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-catalog.getunits
+      outputParameters:
+      - type: object
+        mapping: $.

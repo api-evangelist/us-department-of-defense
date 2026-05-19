@@ -1,0 +1,249 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: USACE Corps Water Management System Data API — Locations
+  description: 'USACE Corps Water Management System Data API — Locations. 4 operations. Lead operation: Get Basins. Self-contained
+    Naftiko capability covering one Us Department Of Defense business surface.'
+  tags:
+  - Us Department Of Defense
+  - Locations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    US_DEPARTMENT_OF_DEFENSE_API_KEY: US_DEPARTMENT_OF_DEFENSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: usace-cwms-data-locations
+    baseUri: https://cwms-data.usace.army.mil/cwms-data/api/latest
+    description: USACE Corps Water Management System Data API — Locations business capability. Self-contained, no shared references.
+    resources:
+    - name: basins
+      path: /basins
+      operations:
+      - name: getbasins
+        method: GET
+        description: Get Basins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: USACE district office ID
+    - name: locations
+      path: /locations
+      operations:
+      - name: getlocations
+        method: GET
+        description: Get Locations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: Filter by USACE district office ID
+        - name: names
+          in: query
+          type: string
+          description: Pipe-separated list of location IDs to retrieve
+        - name: unit
+          in: query
+          type: string
+          description: Unit system for coordinates (EN or SI)
+        - name: datum
+          in: query
+          type: string
+          description: Elevation datum for location elevations
+        - name: format
+          in: query
+          type: string
+          description: Response format
+    - name: locations-catalog
+      path: /locations/catalog
+      operations:
+      - name: getlocationcatalog
+        method: GET
+        description: Get Location Catalog
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: office
+          in: query
+          type: string
+          description: Filter by USACE district office ID
+        - name: cursor
+          in: query
+          type: string
+          description: Pagination cursor
+        - name: page-size
+          in: query
+          type: integer
+          description: Number of entries per page
+    - name: locations-locationId
+      path: /locations/{locationId}
+      operations:
+      - name: getlocation
+        method: GET
+        description: Get Location Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: locationId
+          in: path
+          type: string
+          description: CWMS location identifier
+          required: true
+        - name: office
+          in: query
+          type: string
+          description: USACE district office ID
+          required: true
+        - name: unit
+          in: query
+          type: string
+          description: Unit system for coordinates
+  exposes:
+  - type: rest
+    namespace: usace-cwms-data-locations-rest
+    port: 8080
+    description: REST adapter for USACE Corps Water Management System Data API — Locations. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/basins
+      name: basins
+      description: REST surface for basins.
+      operations:
+      - method: GET
+        name: getbasins
+        description: Get Basins
+        call: usace-cwms-data-locations.getbasins
+        with:
+          office: rest.office
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations
+      name: locations
+      description: REST surface for locations.
+      operations:
+      - method: GET
+        name: getlocations
+        description: Get Locations
+        call: usace-cwms-data-locations.getlocations
+        with:
+          office: rest.office
+          names: rest.names
+          unit: rest.unit
+          datum: rest.datum
+          format: rest.format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations/catalog
+      name: locations-catalog
+      description: REST surface for locations-catalog.
+      operations:
+      - method: GET
+        name: getlocationcatalog
+        description: Get Location Catalog
+        call: usace-cwms-data-locations.getlocationcatalog
+        with:
+          office: rest.office
+          cursor: rest.cursor
+          page-size: rest.page-size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/locations/{locationid}
+      name: locations-locationid
+      description: REST surface for locations-locationId.
+      operations:
+      - method: GET
+        name: getlocation
+        description: Get Location Details
+        call: usace-cwms-data-locations.getlocation
+        with:
+          locationId: rest.locationId
+          office: rest.office
+          unit: rest.unit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: usace-cwms-data-locations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for USACE Corps Water Management System Data API — Locations. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-basins
+      description: Get Basins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-locations.getbasins
+      with:
+        office: tools.office
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-locations
+      description: Get Locations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-locations.getlocations
+      with:
+        office: tools.office
+        names: tools.names
+        unit: tools.unit
+        datum: tools.datum
+        format: tools.format
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-location-catalog
+      description: Get Location Catalog
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-locations.getlocationcatalog
+      with:
+        office: tools.office
+        cursor: tools.cursor
+        page-size: tools.page-size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-location-details
+      description: Get Location Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: usace-cwms-data-locations.getlocation
+      with:
+        locationId: tools.locationId
+        office: tools.office
+        unit: tools.unit
+      outputParameters:
+      - type: object
+        mapping: $.
