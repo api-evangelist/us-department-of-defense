@@ -1,6 +1,8 @@
 aid: us-department-of-defense
 url: https://raw.githubusercontent.com/api-evangelist/us-department-of-defense/refs/heads/main/apis.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/us-department-of-defense-agentic-access.yml
   - type: DomainSecurity
     url: security/us-department-of-defense-domain-security.yml
   - type: LinkedIn
