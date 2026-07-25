@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Ratings API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Ratings
+  description: Rating curves and tables
+paths:
+  /ratings:
+    get:
+      operationId: getRatings
+      summary: Get Rating Curves
+      description: Returns rating curves used to convert gage height (stage) measurements to discharge (streamflow) values. Rating curves are essential for computing streamflow from continuous stage measurements.
+      tags:
+      - Ratings
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: rating-id-mask
+        in: query
+        description: Pattern mask to filter rating IDs
+        required: false
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: Start of the time window for effective ratings
+        required: false
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: End of the time window for effective ratings
+        required: false
+        schema:
+          type: string
+      - name: method
+        in: query
+        description: Rating method (e.g., LINEAR, LOGARITHMIC)
+        required: false
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: Response format
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        '200':
+          description: Rating curves
+          content:
+            application/json:
+              schema:
+                type: object

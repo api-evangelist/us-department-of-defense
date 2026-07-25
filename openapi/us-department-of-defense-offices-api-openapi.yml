@@ -1,0 +1,52 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Offices API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Offices
+  description: USACE district offices
+paths:
+  /offices:
+    get:
+      operationId: getOffices
+      summary: Get USACE Offices
+      description: Returns a list of USACE district offices with their identifiers and information. Offices are used to scope data queries within the CWMS system.
+      tags:
+      - Offices
+      responses:
+        '200':
+          description: List of USACE district offices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfficesResponse'
+components:
+  schemas:
+    OfficesResponse:
+      type: object
+      properties:
+        offices:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Office identifier/abbreviation
+              long-name:
+                type: string
+                description: Full office name
+              headquarters:
+                type: boolean
+                description: Whether this is a headquarters office

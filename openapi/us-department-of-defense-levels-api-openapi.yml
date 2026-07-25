@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Levels API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Levels
+  description: Location levels and pool data
+paths:
+  /levels:
+    get:
+      operationId: getLevels
+      summary: Get Location Levels
+      description: Returns location level data including pool elevations, flood stages, and operational thresholds for CWMS monitoring locations.
+      tags:
+      - Levels
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: location-id
+        in: query
+        description: CWMS location identifier
+        required: false
+        schema:
+          type: string
+      - name: parameter-id
+        in: query
+        description: Parameter identifier (e.g., Stage, Elev)
+        required: false
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit system for output values
+        required: false
+        schema:
+          type: string
+      - name: begin
+        in: query
+        description: Start of time window
+        required: false
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: End of time window
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location level data
+          content:
+            application/json:
+              schema:
+                type: object
+  /pools:
+    get:
+      operationId: getPools
+      summary: Get Reservoir Pools
+      description: Returns reservoir pool definitions including storage zones, flood control pools, and conservation pools for USACE projects.
+      tags:
+      - Levels
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: project-id-mask
+        in: query
+        description: Pattern mask to filter project IDs
+        required: false
+        schema:
+          type: string
+      - name: name-mask
+        in: query
+        description: Pattern mask to filter pool names
+        required: false
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit system for output values
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reservoir pool definitions
+          content:
+            application/json:
+              schema:
+                type: object

@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Time Series API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Time Series
+  description: Time series data retrieval and management
+paths:
+  /timeseries:
+    get:
+      operationId: getTimeSeries
+      summary: Get Time Series Data
+      description: Returns time series data for a specified location and parameter. Supports retrieval of streamflow, gage height, reservoir levels, temperature, and other continuous measurements. Results are paginated for large datasets.
+      tags:
+      - Time Series
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID (e.g., CWMS, SWT, LRH)
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Time series ID in format Location.Parameter.Type.Interval.Duration.Version
+        required: false
+        schema:
+          type: string
+      - name: begin
+        in: query
+        description: Start of the time window (ISO 8601 or milliseconds since epoch)
+        required: false
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: End of the time window (ISO 8601 or milliseconds since epoch)
+        required: false
+        schema:
+          type: string
+      - name: datum
+        in: query
+        description: Elevation datum for stage data (e.g., NAVD88, NGVD29)
+        required: false
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit of measure for the output (e.g., EN for English, SI for metric)
+        required: false
+        schema:
+          type: string
+      - name: timezone
+        in: query
+        description: Timezone for date/time values in response
+        required: false
+        schema:
+          type: string
+          default: UTC
+      - name: format
+        in: query
+        description: Response format
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - tab
+          - csv
+          - xml
+          default: json
+      - name: page-size
+        in: query
+        description: Number of values per page
+        required: false
+        schema:
+          type: integer
+          default: 500
+      - name: page
+        in: query
+        description: Page cursor for pagination (from previous response)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Time series data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesResponse'
+        '400':
+          description: Bad request - invalid parameters
+        '404':
+          description: Time series not found
+  /timeseries/catalog:
+    get:
+      operationId: getTimeSeriesCatalog
+      summary: Get Time Series Catalog
+      description: Returns a catalog of available time series identifiers.
+      tags:
+      - Time Series
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: timeseries-id-regex
+        in: query
+        description: Regular expression pattern to filter time series IDs
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Pagination cursor from previous response
+        required: false
+        schema:
+          type: string
+      - name: page-size
+        in: query
+        description: Number of entries per page
+        required: false
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Time series catalog entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesCatalogResponse'
+components:
+  schemas:
+    TimeSeriesCatalogResponse:
+      type: object
+      properties:
+        page:
+          type: string
+        next-page:
+          type: string
+        total:
+          type: integer
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              office:
+                type: string
+              name:
+                type: string
+              units:
+                type: string
+              interval:
+                type: string
+              interval-offset:
+                type: integer
+    TimeSeriesResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Time series ID
+        office-id:
+          type: string
+          description: USACE district office ID
+        units:
+          type: string
+          description: Unit of measure for values
+        interval:
+          type: integer
+          description: Interval between values in minutes
+        interval-offset:
+          type: integer
+          description: Offset in minutes from midnight
+        time-zone:
+          type: string
+          description: Time zone for date/time values
+        values:
+          type: array
+          items:
+            type: array
+            description: '[timestamp_ms, value, quality_code]'
+            items:
+              type: number
+        page:
+          type: string
+          description: Cursor for retrieving the next page
+        next-page:
+          type: string
+          description: Next page cursor
+        total:
+          type: integer
+          description: Total number of values matching the query

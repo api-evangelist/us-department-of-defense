@@ -1,0 +1,175 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Catalog
+  description: Data catalog and discovery
+paths:
+  /timeseries/catalog:
+    get:
+      operationId: getTimeSeriesCatalog
+      summary: Get Time Series Catalog
+      description: Returns a catalog of available time series identifiers.
+      tags:
+      - Catalog
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: timeseries-id-regex
+        in: query
+        description: Regular expression pattern to filter time series IDs
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Pagination cursor from previous response
+        required: false
+        schema:
+          type: string
+      - name: page-size
+        in: query
+        description: Number of entries per page
+        required: false
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Time series catalog entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesCatalogResponse'
+  /locations/catalog:
+    get:
+      operationId: getLocationCatalog
+      summary: Get Location Catalog
+      description: Returns a searchable catalog of all available CWMS locations.
+      tags:
+      - Catalog
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Pagination cursor
+        required: false
+        schema:
+          type: string
+      - name: page-size
+        in: query
+        description: Number of entries per page
+        required: false
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Location catalog entries
+          content:
+            application/json:
+              schema:
+                type: object
+  /parameters:
+    get:
+      operationId: getParameters
+      summary: Get Parameters
+      description: Returns the list of CWMS parameters available for time series and location level queries (e.g., Stage, Flow, Elev, Temp-Water).
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: List of available CWMS parameters
+          content:
+            application/json:
+              schema:
+                type: object
+  /units:
+    get:
+      operationId: getUnits
+      summary: Get Units
+      description: Returns the list of measurement units available in the CWMS system.
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: List of available units
+          content:
+            application/json:
+              schema:
+                type: object
+  /states:
+    get:
+      operationId: getStates
+      summary: Get States
+      description: Returns the list of US states recognized in the CWMS system.
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: List of states
+          content:
+            application/json:
+              schema:
+                type: object
+  /counties:
+    get:
+      operationId: getCounties
+      summary: Get Counties
+      description: Returns the list of US counties with CWMS location data.
+      tags:
+      - Catalog
+      responses:
+        '200':
+          description: List of counties
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    TimeSeriesCatalogResponse:
+      type: object
+      properties:
+        page:
+          type: string
+        next-page:
+          type: string
+        total:
+          type: integer
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              office:
+                type: string
+              name:
+                type: string
+              units:
+                type: string
+              interval:
+                type: string
+              interval-offset:
+                type: integer

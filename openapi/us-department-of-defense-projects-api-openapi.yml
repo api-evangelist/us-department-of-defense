@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Projects API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Projects
+  description: USACE projects and reservoirs
+paths:
+  /projects:
+    get:
+      operationId: getProjects
+      summary: Get USACE Projects
+      description: Returns USACE projects such as reservoirs, navigation projects, and flood control structures with their operational parameters.
+      tags:
+      - Projects
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: project-id-mask
+        in: query
+        description: Pattern mask to filter project IDs
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of USACE projects
+          content:
+            application/json:
+              schema:
+                type: object
+  /pools:
+    get:
+      operationId: getPools
+      summary: Get Reservoir Pools
+      description: Returns reservoir pool definitions including storage zones, flood control pools, and conservation pools for USACE projects.
+      tags:
+      - Projects
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: project-id-mask
+        in: query
+        description: Pattern mask to filter project IDs
+        required: false
+        schema:
+          type: string
+      - name: name-mask
+        in: query
+        description: Pattern mask to filter pool names
+        required: false
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit system for output values
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reservoir pool definitions
+          content:
+            application/json:
+              schema:
+                type: object

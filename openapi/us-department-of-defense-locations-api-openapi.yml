@@ -1,0 +1,251 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Locations API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Locations
+  description: CWMS monitoring locations and metadata
+paths:
+  /locations:
+    get:
+      operationId: getLocations
+      summary: Get Locations
+      description: Returns a list of CWMS monitoring locations matching the specified criteria. Locations represent physical sites where measurements are taken or water management occurs.
+      tags:
+      - Locations
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: names
+        in: query
+        description: Pipe-separated list of location IDs to retrieve
+        required: false
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit system for coordinates (EN or SI)
+        required: false
+        schema:
+          type: string
+      - name: datum
+        in: query
+        description: Elevation datum for location elevations
+        required: false
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: Response format
+        required: false
+        schema:
+          type: string
+          enum:
+          - json
+          - tab
+          - csv
+          - xml
+          default: json
+      responses:
+        '200':
+          description: Location data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationsResponse'
+        '404':
+          description: Location not found
+  /locations/{locationId}:
+    get:
+      operationId: getLocation
+      summary: Get Location Details
+      description: Returns details for a single CWMS monitoring location.
+      tags:
+      - Locations
+      parameters:
+      - name: locationId
+        in: path
+        description: CWMS location identifier
+        required: true
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: true
+        schema:
+          type: string
+      - name: unit
+        in: query
+        description: Unit system for coordinates
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Location not found
+  /locations/catalog:
+    get:
+      operationId: getLocationCatalog
+      summary: Get Location Catalog
+      description: Returns a searchable catalog of all available CWMS locations.
+      tags:
+      - Locations
+      parameters:
+      - name: office
+        in: query
+        description: Filter by USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Pagination cursor
+        required: false
+        schema:
+          type: string
+      - name: page-size
+        in: query
+        description: Number of entries per page
+        required: false
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Location catalog entries
+          content:
+            application/json:
+              schema:
+                type: object
+  /basins:
+    get:
+      operationId: getBasins
+      summary: Get Basins
+      description: Returns hydrologic basins defined in CWMS.
+      tags:
+      - Locations
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of basins
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        office-id:
+          type: string
+          description: USACE district office ID
+        name:
+          type: string
+          description: Location identifier
+        latitude:
+          type: number
+          description: Latitude in decimal degrees
+        longitude:
+          type: number
+          description: Longitude in decimal degrees
+        elevation:
+          type: number
+          description: Elevation above datum
+        horizontal-datum:
+          type: string
+          description: Horizontal coordinate datum
+        vertical-datum:
+          type: string
+          description: Vertical elevation datum
+        time-zone-name:
+          type: string
+          description: Time zone for the location
+        location-type:
+          type: string
+          description: Classification of the location type
+        county-name:
+          type: string
+          description: County name
+        state-initial:
+          type: string
+          description: Two-letter state abbreviation
+        active:
+          type: boolean
+          description: Whether the location is currently active
+        public-name:
+          type: string
+          description: Public-facing display name
+        long-name:
+          type: string
+          description: Full long name of the location
+        description:
+          type: string
+          description: Description of the location
+    LocationsResponse:
+      type: object
+      properties:
+        locations:
+          type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                office-id:
+                  type: string
+                name:
+                  type: string
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+                elevation:
+                  type: number
+                horizontal-datum:
+                  type: string
+                vertical-datum:
+                  type: string
+                time-zone-name:
+                  type: string
+                location-type:
+                  type: string
+                county-name:
+                  type: string
+                state-initial:
+                  type: string
+                active:
+                  type: boolean
+                public-name:
+                  type: string
+                long-name:
+                  type: string
+                description:
+                  type: string

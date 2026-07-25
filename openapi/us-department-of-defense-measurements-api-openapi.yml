@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: USACE Corps Water Management System Data Catalog Measurements API
+  description: The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.
+  version: latest
+  contact:
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  license:
+    name: US Government Work
+    url: https://www.usa.gov/government-works
+servers:
+- url: https://cwms-data.usace.army.mil/cwms-data/api/latest
+  description: National CWMS Data API Production Server
+- url: https://water.usace.army.mil/cwms-data/api/latest
+  description: USACE Water Data Production Server
+tags:
+- name: Measurements
+  description: Field measurements and observations
+paths:
+  /measurements:
+    get:
+      operationId: getMeasurements
+      summary: Get Field Measurements
+      description: Returns field measurement data collected at CWMS locations including streamflow discharge measurements used for rating curve development.
+      tags:
+      - Measurements
+      parameters:
+      - name: office
+        in: query
+        description: USACE district office ID
+        required: false
+        schema:
+          type: string
+      - name: location-id
+        in: query
+        description: CWMS location identifier
+        required: false
+        schema:
+          type: string
+      - name: unit-system
+        in: query
+        description: Unit system for output values (EN or SI)
+        required: false
+        schema:
+          type: string
+      - name: begin
+        in: query
+        description: Start of time window
+        required: false
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: End of time window
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Field measurements
+          content:
+            application/json:
+              schema:
+                type: object
