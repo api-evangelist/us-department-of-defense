@@ -8,79 +8,190 @@ common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/united-states-department-of-defense
 apis:
-  - aid: us-department-of-defense:cwms-data-api
-    name: USACE Corps Water Management System Data API
-    tags:
-      - Water Management
-      - Hydrology
-      - Army Corps of Engineers
-      - Federal Government
-    humanURL: https://cwms-data.usace.army.mil/cwms-data/
-    properties:
-      - url: https://cwms-data.usace.army.mil/cwms-data/
-        type: Documentation
-      - url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
-        type: SwaggerUI
-      - url: https://cwms-data-api.readthedocs.io/latest/
-        type: Documentation
-      - url: https://github.com/USACE/cwms-data-api
-        type: GitHub
-      - url: >-
-          https://raw.githubusercontent.com/api-evangelist/us-department-of-defense/refs/heads/main/openapi/usace-cwms-data-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The USACE Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE
-      water management data including time series measurements, monitoring locations, rating curves, reservoir levels,
-      and operational data across Army Corps of Engineers projects. Supports both public read access and authenticated
-      write operations.
-  - aid: us-department-of-defense:lpms-api
-    name: USACE Lock Performance Monitoring System API
-    tags:
-      - Waterways
-      - Navigation
-      - Locks
-      - Federal Government
-    humanURL: https://corpslocks.usace.army.mil/lpwb/f
-    properties:
-      - url: https://corpslocks.usace.army.mil/lpwb/f
-        type: Documentation
-      - url: https://catalog.data.gov/dataset/corps-locks
-        type: DataCatalog
-    description: >-
-      The USACE Lock Performance Monitoring System (LPMS) API provides data on inland waterway lock operations across
-      the US Army Corps of Engineers lock system. Endpoints return XML data for lock queue reports (past 24 hours),
-      tonnage reports, and traffic reports (past 30 days). Tracks vessel traffic through 192 commercially active locks
-      on US inland waterways.
-  - aid: us-department-of-defense:defense-data-gov
-    name: DoD Data Portal
-    tags:
-      - Open Data
-      - Defense
-      - Federal Government
-    humanURL: https://data.defense.gov/Featured-API/
-    properties:
-      - url: https://data.defense.gov/Featured-API/
-        type: Documentation
-      - url: https://data.defense.gov/
-        type: Portal
-    description: >-
-      The Department of Defense Data Portal features APIs enabling access to DoD open data across military branches,
-      agencies, and programs. The portal surfaces selected APIs from the DoD's data strategy initiative to make defense
-      data more accessible through reusable APIs.
-  - aid: us-department-of-defense:dod-open-data
-    name: DoD Open Data Platform
-    tags:
-      - Open Data
-      - Defense
-      - Datasets
-      - Federal Government
-    humanURL: https://www.data.mil/
-    properties:
-      - url: https://www.data.mil/
-        type: Portal
-    description: >-
-      The Department of Defense Open Data Platform (data.mil) provides access to unclassified DoD datasets and data
-      services supporting defense research, policy analysis, and public accountability.
+- aid: us-department-of-defense:lpms-api
+  name: USACE Lock Performance Monitoring System API
+  tags:
+  - Waterways
+  - Navigation
+  - Locks
+  - Federal Government
+  humanURL: https://corpslocks.usace.army.mil/lpwb/f
+  properties:
+  - url: https://corpslocks.usace.army.mil/lpwb/f
+    type: Documentation
+  - url: https://catalog.data.gov/dataset/corps-locks
+    type: DataCatalog
+  description: >-
+    The USACE Lock Performance Monitoring System (LPMS) API provides data on inland waterway lock operations
+    across the US Army Corps of Engineers lock system. Endpoints return XML data for lock queue reports
+    (past 24 hours), tonnage reports, and traffic reports (past 30 days). Tracks vessel traffic through
+    192 commercially active locks on US inland waterways.
+- aid: us-department-of-defense:defense-data-gov
+  name: DoD Data Portal
+  tags:
+  - Open Data
+  - Defense
+  - Federal Government
+  humanURL: https://data.defense.gov/Featured-API/
+  properties:
+  - url: https://data.defense.gov/Featured-API/
+    type: Documentation
+  - url: https://data.defense.gov/
+    type: Portal
+  description: >-
+    The Department of Defense Data Portal features APIs enabling access to DoD open data across military
+    branches, agencies, and programs. The portal surfaces selected APIs from the DoD's data strategy initiative
+    to make defense data more accessible through reusable APIs.
+- aid: us-department-of-defense:dod-open-data
+  name: DoD Open Data Platform
+  tags:
+  - Open Data
+  - Defense
+  - Datasets
+  - Federal Government
+  humanURL: https://www.data.mil/
+  properties:
+  - url: https://www.data.mil/
+    type: Portal
+  description: >-
+    The Department of Defense Open Data Platform (data.mil) provides access to unclassified DoD datasets
+    and data services supporting defense research, policy analysis, and public accountability.
+- aid: us-department-of-defense:us-department-of-defense-catalog-api
+  name: US Department of Defense Catalog API
+  description: Data catalog and discovery
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-levels-api
+  name: US Department of Defense Levels API
+  description: Location levels and pool data
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Levels
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-levels-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-locations-api
+  name: US Department of Defense Locations API
+  description: CWMS monitoring locations and metadata
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-locations-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-measurements-api
+  name: US Department of Defense Measurements API
+  description: Field measurements and observations
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Measurements
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-measurements-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-offices-api
+  name: US Department of Defense Offices API
+  description: USACE district offices
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Offices
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-offices-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-projects-api
+  name: US Department of Defense Projects API
+  description: USACE projects and reservoirs
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-projects-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-ratings-api
+  name: US Department of Defense Ratings API
+  description: Rating curves and tables
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Ratings
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-ratings-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
+- aid: us-department-of-defense:us-department-of-defense-time-series-api
+  name: US Department of Defense Time Series API
+  description: Time series data retrieval and management
+  humanURL: https://cwms-data.usace.army.mil/cwms-data/
+  tags:
+  - Time Series
+  properties:
+  - type: OpenAPI
+    url: openapi/us-department-of-defense-time-series-api-openapi.yml
+  - type: Documentation
+    url: https://cwms-data.usace.army.mil/cwms-data/
+  - type: SwaggerUI
+    url: https://cwms-data.usace.army.mil/cwms-data/swagger-ui.html
+  - type: Documentation
+    url: https://cwms-data-api.readthedocs.io/latest/
+  - type: GitHub
+    url: https://github.com/USACE/cwms-data-api
 name: US Department of Defense
 tags:
   - Federal Government
@@ -90,7 +201,19 @@ tags:
   - Waterways
   - Open Data
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/us-department-of-defense.png
 access: 3rd-Party
 created: '2024-12-03'
 modified: '2026-05-19'
