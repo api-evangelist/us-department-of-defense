@@ -1,0 +1,28 @@
+{
+  "provider": "us-department-of-defense",
+  "sources": [
+    "us-department-of-defense-catalog-api-openapi.yml",
+    "us-department-of-defense-levels-api-openapi.yml",
+    "us-department-of-defense-locations-api-openapi.yml",
+    "us-department-of-defense-measurements-api-openapi.yml",
+    "us-department-of-defense-offices-api-openapi.yml",
+    "us-department-of-defense-projects-api-openapi.yml",
+    "us-department-of-defense-ratings-api-openapi.yml",
+    "us-department-of-defense-time-series-api-openapi.yml"
+  ],
+  "outputs": [
+    "us-department-of-defense-catalog-api-openapi.yml",
+    "us-department-of-defense-levels-api-openapi.yml",
+    "us-department-of-defense-locations-api-openapi.yml",
+    "us-department-of-defense-measurements-api-openapi.yml",
+    "us-department-of-defense-offices-api-openapi.yml",
+    "us-department-of-defense-projects-api-openapi.yml",
+    "us-department-of-defense-ratings-api-openapi.yml",
+    "us-department-of-defense-time-series-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
