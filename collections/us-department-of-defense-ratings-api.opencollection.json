@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USACE Corps Water Management System Data Catalog Ratings API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ratings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Rating Curves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/ratings",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID"
+              },
+              {
+                "name": "rating-id-mask",
+                "value": "",
+                "type": "query",
+                "description": "Pattern mask to filter rating IDs"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time window for effective ratings"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End of the time window for effective ratings"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Rating method (e.g., LINEAR, LOGARITHMIC)"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Returns rating curves used to convert gage height (stage) measurements to discharge (streamflow) values. Rating curves are essential for computing streamflow from continuous stage measurements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

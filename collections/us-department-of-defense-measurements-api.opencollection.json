@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USACE Corps Water Management System Data Catalog Measurements API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Measurements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Field Measurements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/measurements",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID"
+              },
+              {
+                "name": "location-id",
+                "value": "",
+                "type": "query",
+                "description": "CWMS location identifier"
+              },
+              {
+                "name": "unit-system",
+                "value": "",
+                "type": "query",
+                "description": "Unit system for output values (EN or SI)"
+              },
+              {
+                "name": "begin",
+                "value": "",
+                "type": "query",
+                "description": "Start of time window"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End of time window"
+              }
+            ]
+          },
+          "docs": "Returns field measurement data collected at CWMS locations including streamflow discharge measurements used for rating curve development."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

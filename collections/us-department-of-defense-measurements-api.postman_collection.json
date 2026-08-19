@@ -1,0 +1,154 @@
+{
+  "item": [
+    {
+      "id": "ced24f93-292c-47ae-8a3b-fc0233387900",
+      "name": "Measurements",
+      "description": {
+        "content": "Field measurements and observations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e90f0c57-d751-4fa3-93fe-83f4498b8804",
+          "name": "Get Field Measurements",
+          "request": {
+            "name": "Get Field Measurements",
+            "description": {
+              "content": "Returns field measurement data collected at CWMS locations including streamflow discharge measurements used for rating curve development.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "measurements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "location-id",
+                  "value": "<string>",
+                  "description": "CWMS location identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit-system",
+                  "value": "<string>",
+                  "description": "Unit system for output values (EN or SI)"
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<string>",
+                  "description": "Start of time window"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of time window"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12fed7af-b428-4173-83c4-4d3b86995d9d",
+              "name": "Field measurements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "measurements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit-system",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8ba668c9-bb47-4b2c-8599-bdd83f8a8360",
+    "name": "USACE Corps Water Management System Data Catalog Measurements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}

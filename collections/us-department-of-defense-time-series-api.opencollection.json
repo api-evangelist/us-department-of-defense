@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USACE Corps Water Management System Data Catalog Time Series API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Time Series Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/timeseries",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID (e.g., CWMS, SWT, LRH)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Time series ID in format Location.Parameter.Type.Interval.Duration.Version"
+              },
+              {
+                "name": "begin",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time window (ISO 8601 or milliseconds since epoch)"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End of the time window (ISO 8601 or milliseconds since epoch)"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Elevation datum for stage data (e.g., NAVD88, NGVD29)"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit of measure for the output (e.g., EN for English, SI for metric)"
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query",
+                "description": "Timezone for date/time values in response"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Number of values per page"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page cursor for pagination (from previous response)"
+              }
+            ]
+          },
+          "docs": "Returns time series data for a specified location and parameter. Supports retrieval of streamflow, gage height, reservoir levels, temperature, and other continuous measurements. Results are paginated for large datasets."
+        },
+        {
+          "info": {
+            "name": "Get Time Series Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/timeseries/catalog",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "Filter by USACE district office ID"
+              },
+              {
+                "name": "timeseries-id-regex",
+                "value": "",
+                "type": "query",
+                "description": "Regular expression pattern to filter time series IDs"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor from previous response"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries per page"
+              }
+            ]
+          },
+          "docs": "Returns a catalog of available time series identifiers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

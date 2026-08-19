@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USACE Corps Water Management System Data Catalog Projects API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get USACE Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/projects",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "Filter by USACE district office ID"
+              },
+              {
+                "name": "project-id-mask",
+                "value": "",
+                "type": "query",
+                "description": "Pattern mask to filter project IDs"
+              }
+            ]
+          },
+          "docs": "Returns USACE projects such as reservoirs, navigation projects, and flood control structures with their operational parameters."
+        },
+        {
+          "info": {
+            "name": "Get Reservoir Pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/pools",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID"
+              },
+              {
+                "name": "project-id-mask",
+                "value": "",
+                "type": "query",
+                "description": "Pattern mask to filter project IDs"
+              },
+              {
+                "name": "name-mask",
+                "value": "",
+                "type": "query",
+                "description": "Pattern mask to filter pool names"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit system for output values"
+              }
+            ]
+          },
+          "docs": "Returns reservoir pool definitions including storage zones, flood control pools, and conservation pools for USACE projects."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

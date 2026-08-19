@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "USACE Corps Water Management System Data Catalog Locations API",
+    "version": "latest"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/locations",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "Filter by USACE district office ID"
+              },
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Pipe-separated list of location IDs to retrieve"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit system for coordinates (EN or SI)"
+              },
+              {
+                "name": "datum",
+                "value": "",
+                "type": "query",
+                "description": "Elevation datum for location elevations"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Returns a list of CWMS monitoring locations matching the specified criteria. Locations represent physical sites where measurements are taken or water management occurs."
+        },
+        {
+          "info": {
+            "name": "Get Location Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/locations/:locationId",
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "CWMS location identifier"
+              },
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "Unit system for coordinates"
+              }
+            ]
+          },
+          "docs": "Returns details for a single CWMS monitoring location."
+        },
+        {
+          "info": {
+            "name": "Get Location Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/locations/catalog",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "Filter by USACE district office ID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Number of entries per page"
+              }
+            ]
+          },
+          "docs": "Returns a searchable catalog of all available CWMS locations."
+        },
+        {
+          "info": {
+            "name": "Get Basins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cwms-data.usace.army.mil/cwms-data/api/latest/basins",
+            "params": [
+              {
+                "name": "office",
+                "value": "",
+                "type": "query",
+                "description": "USACE district office ID"
+              }
+            ]
+          },
+          "docs": "Returns hydrologic basins defined in CWMS."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

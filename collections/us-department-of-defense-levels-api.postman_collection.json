@@ -1,0 +1,276 @@
+{
+  "item": [
+    {
+      "id": "ff00f630-d2bd-4d4f-8539-815e198a13dc",
+      "name": "Levels",
+      "description": {
+        "content": "Location levels and pool data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "133d11bb-bc75-4754-8b36-7eaea6b4550b",
+          "name": "Get Location Levels",
+          "request": {
+            "name": "Get Location Levels",
+            "description": {
+              "content": "Returns location level data including pool elevations, flood stages, and operational thresholds for CWMS monitoring locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "levels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "location-id",
+                  "value": "<string>",
+                  "description": "CWMS location identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "parameter-id",
+                  "value": "<string>",
+                  "description": "Parameter identifier (e.g., Stage, Elev)"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit system for output values"
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<string>",
+                  "description": "Start of time window"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of time window"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "158b665e-12c9-40ba-ae85-9fef8f85801f",
+              "name": "Location level data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "levels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parameter-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82b9a344-13e6-485d-bd3f-36316d0f9a0c",
+          "name": "Get Reservoir Pools",
+          "request": {
+            "name": "Get Reservoir Pools",
+            "description": {
+              "content": "Returns reservoir pool definitions including storage zones, flood control pools, and conservation pools for USACE projects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "project-id-mask",
+                  "value": "<string>",
+                  "description": "Pattern mask to filter project IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "name-mask",
+                  "value": "<string>",
+                  "description": "Pattern mask to filter pool names"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit system for output values"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cb4bff7-170c-4fdc-a942-911967fbe55c",
+              "name": "Reservoir pool definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project-id-mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name-mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b53bd50f-6608-423c-b5c5-debc45cba4ab",
+    "name": "USACE Corps Water Management System Data Catalog Levels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "item": [
+    {
+      "id": "755af7dd-16d6-4d5a-8f85-2c3dbec26853",
+      "name": "Projects",
+      "description": {
+        "content": "USACE projects and reservoirs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "758ba3de-8704-45e8-ab83-2b561d95e664",
+          "name": "Get USACE Projects",
+          "request": {
+            "name": "Get USACE Projects",
+            "description": {
+              "content": "Returns USACE projects such as reservoirs, navigation projects, and flood control structures with their operational parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "project-id-mask",
+                  "value": "<string>",
+                  "description": "Pattern mask to filter project IDs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f369cae-6d72-43af-b57a-5d2263edb87a",
+              "name": "List of USACE projects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project-id-mask",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1610ea44-1896-4ba8-a51e-cdf99a8e0766",
+          "name": "Get Reservoir Pools",
+          "request": {
+            "name": "Get Reservoir Pools",
+            "description": {
+              "content": "Returns reservoir pool definitions including storage zones, flood control pools, and conservation pools for USACE projects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "project-id-mask",
+                  "value": "<string>",
+                  "description": "Pattern mask to filter project IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "name-mask",
+                  "value": "<string>",
+                  "description": "Pattern mask to filter pool names"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit system for output values"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bc074e9-fd35-4449-ad99-1011af583df0",
+              "name": "Reservoir pool definitions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project-id-mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name-mask",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff1dfa38-096c-433f-b9a7-beb7871883fb",
+    "name": "USACE Corps Water Management System Data Catalog Projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "item": [
+    {
+      "id": "c43eaa13-a862-4b44-8068-11844db13c6a",
+      "name": "Locations",
+      "description": {
+        "content": "CWMS monitoring locations and metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d05adf5-d5fe-4194-b482-9979008c437e",
+          "name": "Get Locations",
+          "request": {
+            "name": "Get Locations",
+            "description": {
+              "content": "Returns a list of CWMS monitoring locations matching the specified criteria. Locations represent physical sites where measurements are taken or water management occurs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "Pipe-separated list of location IDs to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit system for coordinates (EN or SI)"
+                },
+                {
+                  "disabled": false,
+                  "key": "datum",
+                  "value": "<string>",
+                  "description": "Elevation datum for location elevations"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8be002a1-1e8d-487a-a9fc-43561377ca93",
+              "name": "Location data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"locations\": {\n    \"properties\": {\n      \"office-id\": \"string\",\n      \"name\": \"string\",\n      \"latitude\": 8137.539066724528,\n      \"longitude\": 5460.122112735096,\n      \"elevation\": 5602.5800035310895,\n      \"horizontal-datum\": \"string\",\n      \"vertical-datum\": \"string\",\n      \"time-zone-name\": \"string\",\n      \"location-type\": \"string\",\n      \"county-name\": \"string\",\n      \"state-initial\": \"string\",\n      \"active\": false,\n      \"public-name\": \"string\",\n      \"long-name\": \"string\",\n      \"description\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2085a2f8-eaf0-46a0-bb3b-34681b90d5f9",
+              "name": "Location not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6578d31b-350e-43c0-8f00-09c7a7a04b12",
+          "name": "Get Location Details",
+          "request": {
+            "name": "Get Location Details",
+            "description": {
+              "content": "Returns details for a single CWMS monitoring location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":locationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "(Required) USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit system for coordinates"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "locationId",
+                  "description": "(Required) CWMS location identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be859162-0ed7-4d6a-95d8-526ad5090eac",
+              "name": "Location details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":locationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) CWMS location identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"office-id\": \"string\",\n  \"name\": \"string\",\n  \"latitude\": 4546.608817683942,\n  \"longitude\": 8928.064927331623,\n  \"elevation\": 4843.60834700497,\n  \"horizontal-datum\": \"string\",\n  \"vertical-datum\": \"string\",\n  \"time-zone-name\": \"string\",\n  \"location-type\": \"string\",\n  \"county-name\": \"string\",\n  \"state-initial\": \"string\",\n  \"active\": true,\n  \"public-name\": \"string\",\n  \"long-name\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d936872-b350-4ed9-9891-37d41a6b2629",
+              "name": "Location not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":locationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "locationId",
+                      "description": "(Required) CWMS location identifier"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80362330-105a-4043-99a1-8297cb931d2c",
+          "name": "Get Location Catalog",
+          "request": {
+            "name": "Get Location Catalog",
+            "description": {
+              "content": "Returns a searchable catalog of all available CWMS locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "100",
+                  "description": "Number of entries per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f82a7228-0384-44b8-932a-f7befe9c7fba",
+              "name": "Location catalog entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae6a8eef-0200-426c-b316-ac6276b10e01",
+          "name": "Get Basins",
+          "request": {
+            "name": "Get Basins",
+            "description": {
+              "content": "Returns hydrologic basins defined in CWMS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d0bbb8e-7289-4741-a8ff-f33b3415ce10",
+              "name": "List of basins",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "668e26cb-8d87-4276-b34f-f854c915cd3d",
+    "name": "USACE Corps Water Management System Data Catalog Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}

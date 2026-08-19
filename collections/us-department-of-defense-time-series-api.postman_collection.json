@@ -1,0 +1,458 @@
+{
+  "item": [
+    {
+      "id": "44cd8ac3-937c-4c15-9bb1-85431e233857",
+      "name": "Time Series",
+      "description": {
+        "content": "Time series data retrieval and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2f37c89-70ab-4f37-9502-a4c9d75468fc",
+          "name": "Get Time Series Data",
+          "request": {
+            "name": "Get Time Series Data",
+            "description": {
+              "content": "Returns time series data for a specified location and parameter. Supports retrieval of streamflow, gage height, reservoir levels, temperature, and other continuous measurements. Results are paginated for large datasets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "USACE district office ID (e.g., CWMS, SWT, LRH)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Time series ID in format Location.Parameter.Type.Interval.Duration.Version"
+                },
+                {
+                  "disabled": false,
+                  "key": "begin",
+                  "value": "<string>",
+                  "description": "Start of the time window (ISO 8601 or milliseconds since epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End of the time window (ISO 8601 or milliseconds since epoch)"
+                },
+                {
+                  "disabled": false,
+                  "key": "datum",
+                  "value": "<string>",
+                  "description": "Elevation datum for stage data (e.g., NAVD88, NGVD29)"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "<string>",
+                  "description": "Unit of measure for the output (e.g., EN for English, SI for metric)"
+                },
+                {
+                  "disabled": false,
+                  "key": "timezone",
+                  "value": "UTC",
+                  "description": "Timezone for date/time values in response"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "500",
+                  "description": "Number of values per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Page cursor for pagination (from previous response)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09cffe94-d113-44a2-99ba-ede983ef326e",
+              "name": "Time series data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"office-id\": \"string\",\n  \"units\": \"string\",\n  \"interval\": 2487,\n  \"interval-offset\": 2875,\n  \"time-zone\": \"string\",\n  \"values\": [\n    [\n      1064.941048784741,\n      8893.810629910346\n    ],\n    [\n      1061.4404541543765,\n      3292.5170116650324\n    ]\n  ],\n  \"page\": \"string\",\n  \"next-page\": \"string\",\n  \"total\": 6322\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c66020b-6424-40a2-b119-a21674f73989",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2f8c78e9-e67d-4873-9fcc-c7fdedc55c0d",
+              "name": "Time series not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "begin",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timezone",
+                      "value": "UTC"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "500"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3b6e70d-f2e6-4710-855a-4322eb2818b2",
+          "name": "Get Time Series Catalog",
+          "request": {
+            "name": "Get Time Series Catalog",
+            "description": {
+              "content": "Returns a catalog of available time series identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries",
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeseries-id-regex",
+                  "value": "<string>",
+                  "description": "Regular expression pattern to filter time series IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor from previous response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "100",
+                  "description": "Number of entries per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "052c91e1-9705-47d5-8e40-a9dffccdcf77",
+              "name": "Time series catalog entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeseries-id-regex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": \"string\",\n  \"next-page\": \"string\",\n  \"total\": 4972,\n  \"entries\": [\n    {\n      \"office\": \"string\",\n      \"name\": \"string\",\n      \"units\": \"string\",\n      \"interval\": \"string\",\n      \"interval-offset\": 3228\n    },\n    {\n      \"office\": \"string\",\n      \"name\": \"string\",\n      \"units\": \"string\",\n      \"interval\": \"string\",\n      \"interval-offset\": 9724\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cad2ee1d-4048-4695-a12f-c7c15f8259b1",
+    "name": "USACE Corps Water Management System Data Catalog Time Series API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}

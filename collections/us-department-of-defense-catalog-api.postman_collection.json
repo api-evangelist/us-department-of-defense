@@ -1,0 +1,530 @@
+{
+  "item": [
+    {
+      "id": "2fa79ebe-ef9d-4faf-aabc-9700d7af9dbe",
+      "name": "Catalog",
+      "description": {
+        "content": "Data catalog and discovery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c88dc01-63a8-4339-a09f-8d35e700b7b4",
+          "name": "Get Time Series Catalog",
+          "request": {
+            "name": "Get Time Series Catalog",
+            "description": {
+              "content": "Returns a catalog of available time series identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "timeseries",
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeseries-id-regex",
+                  "value": "<string>",
+                  "description": "Regular expression pattern to filter time series IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor from previous response"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "100",
+                  "description": "Number of entries per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "545bf7eb-089c-43e7-9d69-d62021abbcbc",
+              "name": "Time series catalog entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "timeseries",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeseries-id-regex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": \"string\",\n  \"next-page\": \"string\",\n  \"total\": 8034,\n  \"entries\": [\n    {\n      \"office\": \"string\",\n      \"name\": \"string\",\n      \"units\": \"string\",\n      \"interval\": \"string\",\n      \"interval-offset\": 5817\n    },\n    {\n      \"office\": \"string\",\n      \"name\": \"string\",\n      \"units\": \"string\",\n      \"interval\": \"string\",\n      \"interval-offset\": 6752\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f198516a-bee0-45fd-8c3c-d04c51023c7b",
+          "name": "Get Location Catalog",
+          "request": {
+            "name": "Get Location Catalog",
+            "description": {
+              "content": "Returns a searchable catalog of all available CWMS locations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "office",
+                  "value": "<string>",
+                  "description": "Filter by USACE district office ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Pagination cursor"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "100",
+                  "description": "Number of entries per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9f49e48-f3e0-47b9-83ce-dcbcfc46acb4",
+              "name": "Location catalog entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "office",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a87a6302-b24a-466c-9e6c-b9037871cff4",
+          "name": "Get Parameters",
+          "request": {
+            "name": "Get Parameters",
+            "description": {
+              "content": "Returns the list of CWMS parameters available for time series and location level queries (e.g., Stage, Flow, Elev, Temp-Water).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parameters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84cd42e2-5077-44f9-b148-badb99a49d9b",
+              "name": "List of available CWMS parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d2f8cfb-cca5-4536-9da6-5cd7956d4ec9",
+          "name": "Get Units",
+          "request": {
+            "name": "Get Units",
+            "description": {
+              "content": "Returns the list of measurement units available in the CWMS system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68ca2167-11f5-49c1-b156-fc4b88530288",
+              "name": "List of available units",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2817af7c-5ed5-4fb1-b337-2767edea4323",
+          "name": "Get States",
+          "request": {
+            "name": "Get States",
+            "description": {
+              "content": "Returns the list of US states recognized in the CWMS system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "states"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6062e732-95ee-4319-b67d-15d4f6591d00",
+              "name": "List of states",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fed4f91c-f819-4443-a4e6-dfdf7466479b",
+          "name": "Get Counties",
+          "request": {
+            "name": "Get Counties",
+            "description": {
+              "content": "Returns the list of US counties with CWMS location data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "counties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae6c9319-f233-470b-a027-d72ef731ed09",
+              "name": "List of counties",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "counties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cwms-data.usace.army.mil/cwms-data/api/latest",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "423663a4-2180-4699-a944-54f393127473",
+    "name": "USACE Corps Water Management System Data Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Corps Water Management System Data API (CDA) is a REST service providing programmatic access to USACE water management data. It supports retrieval of time series measurements, monitoring locations, rating curves, reservoir pool levels, lock data, and operational information across Army Corps of Engineers projects. Public data is accessible without authentication; write operations require an API key.",
+      "type": "text/plain"
+    }
+  }
+}
