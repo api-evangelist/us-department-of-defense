@@ -14,6 +14,11 @@ apis:
   - Waterways
   - Navigation
   - Locks
+  - Federal-Government
+  tags_raw:
+  - Waterways
+  - Navigation
+  - Locks
   - Federal Government
   humanURL: https://corpslocks.usace.army.mil/lpwb/f
   properties:
@@ -31,6 +36,10 @@ apis:
   tags:
   - Open Data
   - Defense
+  - Federal-Government
+  tags_raw:
+  - Open Data
+  - Defense
   - Federal Government
   humanURL: https://data.defense.gov/Featured-API/
   properties:
@@ -45,6 +54,11 @@ apis:
 - aid: us-department-of-defense:dod-open-data
   name: DoD Open Data Platform
   tags:
+  - Open Data
+  - Defense
+  - Datasets
+  - Federal-Government
+  tags_raw:
   - Open Data
   - Defense
   - Datasets
@@ -146,6 +160,8 @@ apis:
   description: USACE projects and reservoirs
   humanURL: https://cwms-data.usace.army.mil/cwms-data/
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -194,6 +210,13 @@ apis:
     url: https://github.com/USACE/cwms-data-api
 name: US Department of Defense
 tags:
+  - Federal-Government
+  - Defense
+  - Military
+  - Water Management
+  - Waterways
+  - Open Data
+tags_raw:
   - Federal Government
   - Defense
   - Military
