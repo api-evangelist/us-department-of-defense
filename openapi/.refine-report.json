@@ -1,14 +1,7 @@
 {
   "provider": "us-department-of-defense",
   "sources": [
-    "us-department-of-defense-catalog-api-openapi.yml",
-    "us-department-of-defense-levels-api-openapi.yml",
-    "us-department-of-defense-locations-api-openapi.yml",
-    "us-department-of-defense-measurements-api-openapi.yml",
-    "us-department-of-defense-offices-api-openapi.yml",
-    "us-department-of-defense-projects-api-openapi.yml",
-    "us-department-of-defense-ratings-api-openapi.yml",
-    "us-department-of-defense-time-series-api-openapi.yml"
+    "_original/usace-cwms-data-api-openapi.yml"
   ],
   "outputs": [
     "us-department-of-defense-catalog-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "usace-cwms-data-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "us-department-of-defense-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-levels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-measurements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-offices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-ratings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "us-department-of-defense-time-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
