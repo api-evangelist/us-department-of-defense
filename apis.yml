@@ -14,12 +14,13 @@ apis:
   - Waterways
   - Navigation
   - Locks
-  - Federal-Government
+  - Federal Government
   tags_raw:
   - Waterways
   - Navigation
   - Locks
   - Federal Government
+  - Federal-Government
   humanURL: https://corpslocks.usace.army.mil/lpwb/f
   properties:
   - url: https://corpslocks.usace.army.mil/lpwb/f
@@ -36,11 +37,12 @@ apis:
   tags:
   - Open Data
   - Defense
-  - Federal-Government
+  - Federal Government
   tags_raw:
   - Open Data
   - Defense
   - Federal Government
+  - Federal-Government
   humanURL: https://data.defense.gov/Featured-API/
   properties:
   - url: https://data.defense.gov/Featured-API/
@@ -57,12 +59,13 @@ apis:
   - Open Data
   - Defense
   - Datasets
-  - Federal-Government
+  - Federal Government
   tags_raw:
   - Open Data
   - Defense
   - Datasets
   - Federal Government
+  - Federal-Government
   humanURL: https://www.data.mil/
   properties:
   - url: https://www.data.mil/
@@ -212,7 +215,7 @@ apis:
     url: https://github.com/USACE/cwms-data-api
 name: US Department of Defense
 tags:
-  - Federal-Government
+  - Federal Government
   - Defense
   - Military
   - Water Management
@@ -225,17 +228,22 @@ tags_raw:
   - Water Management
   - Waterways
   - Open Data
+  - Federal-Government
 kind: contract
 deliveryModel:
   model: unknown
-  open_source: false
+  license_evidence:
+    not_product:
+    - usace/cwms-data-api
+  open_source: unknown
   commercial: false
   callable_host: true
   label: Delivery model not determined — needs a product licence on record
   confidence: low
   source:
   - openapi
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
