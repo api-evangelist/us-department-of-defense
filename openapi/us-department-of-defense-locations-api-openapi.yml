@@ -162,6 +162,45 @@ paths:
                 type: object
 components:
   schemas:
+    LocationsResponse:
+      type: object
+      properties:
+        locations:
+          type: object
+          properties:
+            properties:
+              type: object
+              properties:
+                office-id:
+                  type: string
+                name:
+                  type: string
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+                elevation:
+                  type: number
+                horizontal-datum:
+                  type: string
+                vertical-datum:
+                  type: string
+                time-zone-name:
+                  type: string
+                location-type:
+                  type: string
+                county-name:
+                  type: string
+                state-initial:
+                  type: string
+                active:
+                  type: boolean
+                public-name:
+                  type: string
+                long-name:
+                  type: string
+                description:
+                  type: string
     Location:
       type: object
       properties:
@@ -210,42 +249,3 @@ components:
         description:
           type: string
           description: Description of the location
-    LocationsResponse:
-      type: object
-      properties:
-        locations:
-          type: object
-          properties:
-            properties:
-              type: object
-              properties:
-                office-id:
-                  type: string
-                name:
-                  type: string
-                latitude:
-                  type: number
-                longitude:
-                  type: number
-                elevation:
-                  type: number
-                horizontal-datum:
-                  type: string
-                vertical-datum:
-                  type: string
-                time-zone-name:
-                  type: string
-                location-type:
-                  type: string
-                county-name:
-                  type: string
-                state-initial:
-                  type: string
-                active:
-                  type: boolean
-                public-name:
-                  type: string
-                long-name:
-                  type: string
-                description:
-                  type: string
