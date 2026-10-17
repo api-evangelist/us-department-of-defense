@@ -146,30 +146,6 @@ paths:
                 $ref: '#/components/schemas/TimeSeriesCatalogResponse'
 components:
   schemas:
-    TimeSeriesCatalogResponse:
-      type: object
-      properties:
-        page:
-          type: string
-        next-page:
-          type: string
-        total:
-          type: integer
-        entries:
-          type: array
-          items:
-            type: object
-            properties:
-              office:
-                type: string
-              name:
-                type: string
-              units:
-                type: string
-              interval:
-                type: string
-              interval-offset:
-                type: integer
     TimeSeriesResponse:
       type: object
       properties:
@@ -207,3 +183,27 @@ components:
         total:
           type: integer
           description: Total number of values matching the query
+    TimeSeriesCatalogResponse:
+      type: object
+      properties:
+        page:
+          type: string
+        next-page:
+          type: string
+        total:
+          type: integer
+        entries:
+          type: array
+          items:
+            type: object
+            properties:
+              office:
+                type: string
+              name:
+                type: string
+              units:
+                type: string
+              interval:
+                type: string
+              interval-offset:
+                type: integer
